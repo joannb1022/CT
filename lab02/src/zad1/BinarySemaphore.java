@@ -7,12 +7,10 @@ public class BinarySemaphore {
     public BinarySemaphore() {
     }
 
-    public synchronized void P() {
+    public synchronized void P() {  //opuszczanie
         if(!state){
-            System.out.println("jestem w P" + waiting);
             waiting++;
             while(!state){
-                System.out.println("while");
                 try {
                     wait();
                 }
@@ -21,17 +19,15 @@ public class BinarySemaphore {
                 }
             }
             waiting--;
-            System.out.println("zmniejsam w p" + waiting);
         }
-    state = false;
+        state = false;
+
     }
 
-    public synchronized void V() {
-        state = true;
-        System.out.println("jestem w V");
+    public synchronized void V() { //podnoszenie
         if(waiting > 0){
             this.notify();
-            System.out.println("jestem w V " + waiting);
         }
+        state = true;
     }
 }

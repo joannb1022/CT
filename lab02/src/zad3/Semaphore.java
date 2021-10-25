@@ -1,8 +1,8 @@
 package zad3;
 
 public class Semaphore {
-    private BinarySemaphore mutexSemaphore;
-    private BinarySemaphore waitSemaphore;
+    private final BinarySemaphore mutexSemaphore;
+    private final BinarySemaphore waitSemaphore;
     private int resources;
 
     public Semaphore(int resources){
@@ -19,19 +19,16 @@ public class Semaphore {
             mutexSemaphore.V();
             waitSemaphore.P();
         }
-        else {
-            mutexSemaphore.V();
-        }
-
+        mutexSemaphore.V();
     }
 
     public void V() {
         mutexSemaphore.P();
         resources+=1;
-
         if(resources <= 0){
             waitSemaphore.V();
         }
-        mutexSemaphore.V();
+        else
+            mutexSemaphore.V();
     }
 }

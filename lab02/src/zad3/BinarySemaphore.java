@@ -8,10 +8,6 @@ public class BinarySemaphore {
         this.state = state;
     }
 
-    public BinarySemaphore(){
-
-    }
-
     public synchronized void P() {
         if(!state){
             waiting++;

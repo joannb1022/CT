@@ -16,12 +16,9 @@ public class Race {
             iThread.join();
             dThread.join();
 
-            if (cnt.value() !=0){
+            if (cnt.value() != 0) {
                 System.out.println(cnt.value());
             }
-            else
-                System.out.println("ghhehe" + i);
         }
     }
-
 }
