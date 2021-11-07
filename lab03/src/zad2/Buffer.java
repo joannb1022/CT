@@ -15,7 +15,6 @@ class Buffer {
         this.notAvailable = new Semaphore(0);
         this.binSem = new BinarySemaphore(true);
     }
-    
 
     public void put(int i) {
         this.available.P();

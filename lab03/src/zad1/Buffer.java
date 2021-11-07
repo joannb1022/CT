@@ -1,10 +1,12 @@
 package zad1;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Buffer {
         private final int size;
-        private final LinkedList <Integer> bufferList = new LinkedList<>();
+        private final List<Integer> bufferList = new ArrayList<>();
 
         public Buffer(int size){
                 this.size = size;
@@ -34,7 +36,7 @@ public class Buffer {
                                 System.out.println("ERROR");
                         }
                 }
-                int val = this.bufferList.removeFirst();
+                int val = this.bufferList.remove(bufferList.size()-1);
                 System.out.println("Getting item... " + val);
                 this.notify();
                 return val;
