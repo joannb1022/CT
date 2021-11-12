@@ -1,64 +1,57 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class Buffer {
-    private final int M;
-    private final LinkedList<Integer> bufferList = new LinkedList<>();
-    private final ReentrantLock lock = new ReentrantLock();
-    private final Condition firstProd = lock.newCondition();
-    private final Condition firstCons = lock.newCondition();
-    private final Condition restProd = lock.newCondition();
-    private final Condition restCons = lock.newCondition();
 
+public class Buffer {
+
+    private LinkedList<Integer> bufferList = new LinkedList<>();
+    private final int size;
+
+    final ReentrantLock lock = new ReentrantLock();
+    final Condition firstProd  = lock.newCondition();
+    final Condition firstCons = lock.newCondition();
+    final Condition restProd = lock.newCondition();
+    final Condition restCons = lock.newCondition();
 
     public Buffer(int M) {
-        this.M = M;
+        this.size = 2 * M;
     }
 
-    public void put(ArrayList<Integer> list) throws InterruptedException {
+    public void put(ArrayList<Integer> portion_list) throws InterruptedException{
         lock.lock();
-        try{
-            if (lock.hasWaiters(firstProd)){
-                restProd.await();
-            }
-            while(this.M - bufferList.size() < list.size()){
-            firstProd.await();
-            }
-            bufferList.addAll(list);
-            System.out.println("Jest " + bufferList.size() + "elementow");
-
+        try {
+            if(lock.hasWaiters(firstProd)) restProd.await();
+            while(size - bufferList.size() < portion_list.size())
+                firstProd.await();
+            bufferList.addAll(portion_list);
             restProd.signal();
             firstCons.signal();
-
         } finally {
             lock.unlock();
         }
     }
 
-
-    public void get(int num_portions) throws InterruptedException {
+    public void get(int size) throws InterruptedException {
         lock.lock();
-        try{
-            if (lock.hasWaiters(firstCons)){
-                restCons.await();
-            }
-            while (bufferList.size() < num_portions){
+        try {
+            if(lock.hasWaiters(firstCons)) restCons.await();
+            while(bufferList.size() < size)
                 firstCons.await();
-            }
-            for (int i = 0; i < num_portions; i++){
+            for(int i=0; i<size; i++) {
                 bufferList.removeLast();
             }
             restCons.signal();
             firstProd.signal();
-        }finally {
+        } finally {
             lock.unlock();
-
         }
     }
 
-    public int getSize(){
-        return M;
+    public int getSize() {
+        return size;
     }
 }

@@ -1,14 +1,13 @@
-import javax.management.relation.RelationNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 
 public class Producer extends Thread {
     private Buffer _buf;
     private Condition cond;
     private ReentrantLock mainLock;
-    private final Random random  = new Random();
 
     public Producer(Buffer buffer, Condition cond, ReentrantLock mainLock) {
         this._buf = buffer;
@@ -16,18 +15,17 @@ public class Producer extends Thread {
         this.mainLock = mainLock;
     }
 
-
     public void run() {
-        for (int i = 0; i < 100; ++i) {
-            int num_portions = (int)(Math.random() * (_buf.getSize() / 2 - 1));
-            ArrayList<Integer>portions_list = new ArrayList<>(num_portions);
-            for (int j = 0; j < num_portions; j++){
-                portions_list.add(random.nextInt(50));
+        for (int i = 0; i < 100; i++) {
+            ArrayList<Integer> items = new ArrayList<>();
+            int length = (int) (Math.random() * (_buf.getSize() / 2 - 1));
+            for(int j = 0; j<length; j++ ){
+                items.add((int) (Math.random() * 10));
             }
             try {
-                _buf.put(portions_list);
+                _buf.put(items);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
             }
         }
         mainLock.lock();
