@@ -8,28 +8,28 @@ public class Node {
     private Node next_element;
     private final ReentrantLock lock = new ReentrantLock();
 
-    public Node(Object o, Node next_element){
+    public Node(Object o, Node next_element) {
         this.o = o;
         this.next_element = next_element;
     }
 
-    public void addNext(Node next_element){
+    public void addNext(Node next_element) {
         this.next_element = next_element;
     }
 
-    public boolean isLast(){
-      return this.next_element == null;
+    public boolean isLast() {
+        return this.next_element == null;
     }
 
-    public Object getObject(){
+    public Object getObject() {
         return this.o;
     }
 
-    public Node getNext_element(){
+    public Node getNext_element() {
         return this.next_element;
     }
 
-    public ReentrantLock getLock(){
+    public ReentrantLock getLock() {
         return this.lock;
     }
 }
