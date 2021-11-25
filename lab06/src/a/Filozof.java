@@ -9,7 +9,7 @@ public class Filozof extends Thread {
     private ArrayList<Widelec> widelce;
     private long czas;
 
-    public Filozof(int ID, ArrayList<Widelec> widelce){
+    public Filozof(int ID, ArrayList<Widelec> widelce) {
         this.id = ID;
         this.widelce = widelce;
     }
@@ -26,7 +26,6 @@ public class Filozof extends Thread {
             lewy.podnies();
             System.out.println("Tutaj fil " + id + " podniosłem widelec lewy");
 
-
             // jedzenie
             ++_licznik;
             if (_licznik % 1000 == 0) {
@@ -40,15 +39,14 @@ public class Filozof extends Thread {
 
             long end = System.nanoTime();
             this.czas = (start - end) / 1000000;
-
         }
     }
 
-    public long getTime(){
+    public long getTime() {
         return czas;
     }
 
-    public int getID(){
+    public int getID() {
         return this.id;
     }
 }

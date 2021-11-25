@@ -1,6 +1,9 @@
 package b;
 
-public class Widelec { private boolean podniesiony = false;
+public class Widelec {
+
+    private boolean podniesiony = false;
+
     public Widelec(){
 
     }

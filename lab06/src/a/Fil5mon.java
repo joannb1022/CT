@@ -26,8 +26,5 @@ public class Fil5mon {
         for (Filozof f : filozofowie)
             f.join();
 
-        for (Filozof f : filozofowie)
-            System.out.println("Fil " + f.getID() + " jadlem " + f.getTime());
-
     }
 }
