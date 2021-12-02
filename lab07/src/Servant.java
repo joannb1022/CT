@@ -20,21 +20,20 @@ public class Servant {
         int index = findElement();
         int value = buffer[index];
         buffer[index] = 0;
-
         return value;
     }
 
-    public boolean isEmpty(){
-        for (int i = 0; i < this.size; i++){
-            if (this.buffer[i]!=0)
+    public boolean isEmpty() {
+        for (int i = 0; i < this.size; i++) {
+            if (this.buffer[i] != 0)
                 return false;
         }
         return true;
     }
 
-    public boolean isFull(){
-        for (int i = 0; i < this.size; i++){
-            if (this.buffer[i]==0)
+    public boolean isFull() {
+        for (int i = 0; i < this.size; i++) {
+            if (this.buffer[i] == 0)
                 return false;
         }
         return true;
@@ -49,16 +48,13 @@ public class Servant {
         throw new IllegalStateException("at least one files should be free");
     }
 
-    public int findElement(){
+    public int findElement() {
         for (int i = 0; i < this.size; i++) {
             if (buffer[i] != 0) {
-               return i;
+                return i;
             }
         }
         throw new IllegalStateException("at least one files should be free");
     }
-
-
-
 }
 
