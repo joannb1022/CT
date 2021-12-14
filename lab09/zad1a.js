@@ -31,19 +31,11 @@ function executeTask(){
   console.log('done');
 });
 }
-/*
-** Zadanie:
-** Napisz funkcje loop(m), ktora powoduje wykonanie powyzszej
-** sekwencji zadan m razy.
-**
-*/
-//
-function loop(m){
 
+function loop(m){
   if (m != 0){
   executeTask().then(()=>loop(m-1));
-}
-console.log("dsfusd");
+  }
 }
 
 loop(4)

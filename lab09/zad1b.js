@@ -1,5 +1,6 @@
 // import waterfall from 'async/waterfall';
-import  waterfall  from 'async/waterfall.js';
+// import  waterfall  from 'async/waterfall.js';
+var async = require("async");
 
 
 function printAsync(s, cb) {
@@ -37,22 +38,14 @@ function executeTask(callback){
 });
 }
 
-/*
-** Zadanie:
-** Napisz funkcje loop(m), ktora powoduje wykonanie powyzszej
-** sekwencji zadan m razy.
-**
-*/
 
 function loop(m){
   var tasks = []
   for (let i = 0; i<m; i++){
-    tasks.push(executeTask);
+    tasks.push(function(callback){executeTask(callback)})
   }
-  waterfall(tasks);
-  console.log("fsdhufzs");
+  async.waterfall(tasks, function(){console.log("ALL DONE")});
 }
 
 
 loop(4);
-// loop(4);

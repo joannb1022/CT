@@ -41,8 +41,6 @@ function main() {
     let tasks = [];
 
     files.forEach(file => tasks.push(function(callback){waterfallFunction(file, callback)}));
-
-
     let start = new Date();
 
     waterfall(tasks, function(err, result) {
