@@ -1,4 +1,4 @@
-# CT
- 
-## Teoria Współbieżności, Informatyka WiET AGH
-semestr V
+
+## Teoria Współbieżności (Concurrency Theory)
+Informatyka semestr V
+WIET AGH
