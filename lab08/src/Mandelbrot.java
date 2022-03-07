@@ -35,6 +35,7 @@ public class Mandelbrot extends JFrame {
             start_values[j] = i;
             j += 1;
             list_future.add(pool.submit(callable));
+            System.out.println("hrihsisr");
         }
 
         j = 0;
